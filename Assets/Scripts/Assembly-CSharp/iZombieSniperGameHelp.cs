@@ -56,11 +56,11 @@ public class iZombieSniperGameHelp
 			Vector3 vector = m_GameScene.m_CameraScript.GetComponent<Camera>().WorldToScreenPoint(m_Target.m_ModelTransForm.position);
 			if (Utils.IsPad())
 			{
-				m_GameSceneUI.SetGameHelpIconPos(new Vector2(vector.x, vector.y) + new Vector2(5f, -25f) * m_GameState.m_nHDFactor);
+				m_GameSceneUI.SetGameHelpIconPos(m_GameState.GetPosFactor(new Vector2(vector.x, vector.y) + new Vector2(5f, -25f)));
 			}
 			else
 			{
-				m_GameSceneUI.SetGameHelpIconPos(new Vector2(vector.x, vector.y) + new Vector2(10f, -10f) * m_GameState.m_nHDFactor);
+				m_GameSceneUI.SetGameHelpIconPos(m_GameState.GetPosFactor(new Vector2(vector.x, vector.y) + new Vector2(10f, -10f)));
 			}
 		}
 		if (m_HelpState == GameHelpState.Step3)
@@ -160,17 +160,17 @@ public class iZombieSniperGameHelp
 			break;
 		case GameHelpState.Step3:
 			m_GameSceneUI.SetGameHelpUI("hand", new Vector4(0f, 0f, 48f, 43f) * m_GameState.m_nHDFactor, "Fire!", new Vector4(240f, 260f, 200f, 40f) * m_GameState.m_nHDFactor);
-			m_GameSceneUI.SetGameHelpIconPos(new Vector2(440f, 30f) * m_GameState.m_nHDFactor);
+			m_GameSceneUI.SetGameHelpIconPos(m_GameState.GetPosFactor(new Vector2(440f, 30f)));
 			m_GameScene.PlayAudio("UICue");
 			break;
 		case GameHelpState.Step4:
 			m_GameSceneUI.SetGameHelpUI("hand", new Vector4(0f, 0f, 48f, 43f) * m_GameState.m_nHDFactor, "Tap anywhere to exit zoom.", new Vector4(240f, 240f, 240f, 80f) * m_GameState.m_nHDFactor);
-			m_GameSceneUI.SetGameHelpIconPos(new Vector2(400f, 150f) * m_GameState.m_nHDFactor);
+			m_GameSceneUI.SetGameHelpIconPos(m_GameState.GetPosFactor(new Vector2(400f, 150f)));
 			m_GameScene.PlayAudio("UICue");
 			break;
 		case GameHelpState.Step5:
 			m_GameSceneUI.SetGameHelpUI("hand", new Vector4(0f, 0f, 48f, 43f) * m_GameState.m_nHDFactor, "Tap your weapon in the upper right to switch weapons.", new Vector4(240f, 240f, 240f, 80f) * m_GameState.m_nHDFactor);
-			m_GameSceneUI.SetGameHelpIconPos(new Vector2(430f, 290f) * m_GameState.m_nHDFactor);
+			m_GameSceneUI.SetGameHelpIconPos(m_GameState.GetPosFactor(new Vector2(430f, 290f)));
 			m_GameScene.PlayAudio("UICue");
 			break;
 		case GameHelpState.Step6:
@@ -179,7 +179,7 @@ public class iZombieSniperGameHelp
 		case GameHelpState.Step7:
 			m_fTimeCount = 0f;
 			m_GameSceneUI.SetGameHelpUI("hand", new Vector4(0f, 0f, 48f, 43f) * m_GameState.m_nHDFactor, "You can hold down the fire button when using rifles. Mow 'em down!", new Vector4(240f, 220f, 240f, 80f) * m_GameState.m_nHDFactor);
-			m_GameSceneUI.SetGameHelpIconPos(new Vector2(440f, 30f) * m_GameState.m_nHDFactor);
+			m_GameSceneUI.SetGameHelpIconPos(m_GameState.GetPosFactor(new Vector2(440f, 30f)));
 			m_GameScene.PlayAudio("UICue");
 			break;
 		case GameHelpState.Step8:

@@ -6,6 +6,7 @@ public class Locker : MonoBehaviour
 {
 	private void Start()
 	{
+		Application.targetFrameRate = -1;
 		DontDestroyOnLoad(gameObject);
 	}
 

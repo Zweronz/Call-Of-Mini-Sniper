@@ -6,6 +6,10 @@ public class iZombieSniperGameState
 {
 	public int m_nHDFactor;
 
+	public float m_nXPosFactor;
+
+	public float m_nYPosFactor;
+
 	public int m_nScreenWidth;
 
 	public int m_nScreenHeight;
@@ -150,9 +154,16 @@ public class iZombieSniperGameState
 
 	public int[] m_nStageBestKill;
 
+	public Vector2 GetPosFactor(Vector2 v2Pos)
+	{
+		return new Vector2(v2Pos.x * m_nXPosFactor, v2Pos.y * m_nYPosFactor);
+	}
+
 	public void Initialize()
 	{
 		m_nHDFactor = ((!Utils.IsRetina()) ? 1 : 2);
+		m_nXPosFactor = Screen.width / 480f;
+		m_nYPosFactor = Screen.height / 320f;
 		m_nScreenWidth = 480 * m_nHDFactor;
 		m_nScreenHeight = 320 * m_nHDFactor;
 		m_v2ScreenCenter = new Vector2(m_nScreenWidth / 2, m_nScreenHeight / 2);

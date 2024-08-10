@@ -80,7 +80,7 @@ public class iZombieSniperReadyHelp
 			break;
 		case GameReadyState.Step2:
 			m_GameReadyUI.SetGameHelpUI("hand", new Vector4(0f, 0f, 48f, 43f) * m_GameState.m_nHDFactor, string.Empty, new Vector4(240f, 260f, 200f, 40f) * m_GameState.m_nHDFactor);
-			m_GameReadyUI.SetGameHelpIconPos(new Vector2(130f, 262f) * m_GameState.m_nHDFactor);
+			m_GameReadyUI.SetGameHelpIconPos(m_GameState.GetPosFactor(new Vector2(130f, 262f)));
 			iZombieSniperGameApp.GetInstance().PlayAudio("UICue");
 			break;
 		case GameReadyState.Step3:
@@ -89,7 +89,7 @@ public class iZombieSniperReadyHelp
 			break;
 		case GameReadyState.Step4:
 			m_GameReadyUI.SetGameHelpUI("hand", new Vector4(0f, 0f, 48f, 43f) * m_GameState.m_nHDFactor, string.Empty, new Vector4(240f, 260f, 200f, 40f) * m_GameState.m_nHDFactor);
-			m_GameReadyUI.SetGameHelpIconPos(new Vector2(370f, 22f) * m_GameState.m_nHDFactor);
+			m_GameReadyUI.SetGameHelpIconPos(m_GameState.GetPosFactor(new Vector2(370f, 22f)));
 			iZombieSniperGameApp.GetInstance().PlayAudio("UICue");
 			break;
 		}

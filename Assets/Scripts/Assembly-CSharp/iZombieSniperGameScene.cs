@@ -644,16 +644,30 @@ public class iZombieSniperGameScene : iZombieSniperGameSceneBase
 		m_MoonWalk.Update(deltaTime);
 		if (m_MoonWalk.IsFinished(iZombieSniperMoonWalk.MoonWalkType.LookNPC))
 		{
-			m_MoonWalk.m_Type = iZombieSniperMoonWalk.MoonWalkType.None;
-			m_SoliderMesh.SetActiveRecursively(true);
-			m_GameSceneUI.ShowCross(true);
-			m_GameSceneUI.ShowGameUI(true);
-			m_MainChar.SetActiveRecursively(false);
-			m_GameHelp.EnterHelpState(GameHelpState.Step1);
-			iZombieSniperNpc nPC = GetNPC(m_nTurtorialNPC);
-			if (nPC != null)
+			if (!Application.isMobilePlatform)
 			{
-				nPC.SetStateDirectly(nPC.stWaitState);
+				PlayAudio("UIClickGeneral");
+				m_GameState.m_bTutorial = false;
+				m_GameState.SaveData();
+				m_bTutorial = false;
+				Destroy();
+				Initialize();
+				ResetData();
+				StartGame();
+			}
+			else
+			{
+				m_MoonWalk.m_Type = iZombieSniperMoonWalk.MoonWalkType.None;
+				m_SoliderMesh.SetActiveRecursively(true);
+				m_GameSceneUI.ShowCross(true);
+				m_GameSceneUI.ShowGameUI(true);
+				m_MainChar.SetActiveRecursively(false);
+				m_GameHelp.EnterHelpState(GameHelpState.Step1);
+				iZombieSniperNpc nPC = GetNPC(m_nTurtorialNPC);
+				if (nPC != null)
+				{
+					nPC.SetStateDirectly(nPC.stWaitState);
+				}
 			}
 		}
 		if (!m_bPause)
@@ -789,88 +803,6 @@ public class iZombieSniperGameScene : iZombieSniperGameSceneBase
 					{
 						m_bIsDragMouse = false;
 					}
-				}
-			}
-		}
-		else
-		{
-			if ((m_MoonWalk != null && !m_MoonWalk.m_bFinished) || (m_GameHelp.IsInTutorial() && m_GameHelp.IsWaitConfirm()))
-			{
-				return;
-			}
-			
-			if (Screen.lockCursor)
-			{
-				if (Input.GetMouseButtonDown(1))
-				{
-					if (!m_GameSceneUI.IsFadeIn())
-					{
-						if (!m_bAim)
-						{
-							Aim(new Vector2(Screen.width, Screen.height) * 0.5f);
-						}
-						else
-						{
-							CloseAim();
-						}
-					}
-				}
-
-				if (Input.GetMouseButton(0))
-				{
-					Fire(new Vector2(Screen.width, Screen.height) * 0.5f);
-				}
-
-				if (Input.GetKeyDown(KeyCode.Q))
-				{
-					SwitchWeapon();
-				}
-
-				if (m_bAim)
-				{
-					m_CameraScript.YawCamera(Input.GetAxisRaw("Mouse X"));
-					m_CameraScript.PitchCamera(Input.GetAxisRaw("Mouse Y"));
-				}
-				else
-				{
-					m_CameraScript.AimMove(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
-				}
-			}
-
-			if (m_GameHelp.m_HelpState == GameHelpState.Step2 || m_GameHelp.m_HelpState == GameHelpState.Step6)
-			{
-				Ray ray = m_CameraScript.GetComponent<Camera>().ScreenPointToRay(new Vector3(m_GameState.GetShootCenter().x, m_GameState.GetShootCenter().y, 0f));
-				RaycastHit hitInfo;
-				if (Physics.Raycast(ray, out hitInfo, 1000f) && hitInfo.transform.root.name.IndexOf("Zombie") != -1 && hitInfo.transform.root.tag == "NPC")
-				{
-					m_GameHelp.FinishHelpState(m_GameHelp.m_HelpState);
-				}
-			}
-
-			if (m_GameHelp.IsInTutorial() && m_GameHelp.IsWaitConfirm())
-			{
-				m_GameHelp.NextHelpState();
-			}
-			else
-			{
-				if (!m_bAim)
-				{
-					iZombieSniperNpc nPC2 = GetNPC(m_nTurtorialNPC);
-					if (nPC2 != null && m_GameHelp.IsCanAim())
-					{
-						Ray ray2 = m_CameraScript.GetComponent<Camera>().ScreenPointToRay(new Vector3(0, 0, 0f));
-						RaycastHit hitInfo2;
-						if (Physics.Raycast(ray2, out hitInfo2, 1000f) && Vector3.Distance(hitInfo2.point, nPC2.m_ModelTransForm.position) <= 5f)
-						{
-							Aim(new Vector2(Screen.width, Screen.height) * 0.5f);
-							m_GameHelp.FinishHelpState(GameHelpState.Step1);
-						}
-					}
-				}
-				else if (m_GameHelp.IsCanCloseAim())
-				{
-					CloseAim();
-					m_GameHelp.FinishHelpState(GameHelpState.Step4);
 				}
 			}
 		}
@@ -1062,6 +994,11 @@ public class iZombieSniperGameScene : iZombieSniperGameSceneBase
 		}
 		else
 		{
+			if (Input.GetKeyDown(KeyCode.Escape))
+			{
+				SetGamePause(true);
+			}
+
 			if (Screen.lockCursor)
 			{
 				if (Input.GetMouseButtonDown(1))

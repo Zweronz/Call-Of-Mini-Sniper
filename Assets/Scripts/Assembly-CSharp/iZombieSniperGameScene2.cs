@@ -488,6 +488,11 @@ public class iZombieSniperGameScene2 : iZombieSniperGameSceneBase
 				m_GameSceneUI.m_UIManagerRef.HandleInput(touch);
 			}
 
+			if (Input.GetKeyDown(KeyCode.Escape))
+			{
+				SetGamePause(!m_bPause);
+			}
+
 			if (Screen.lockCursor)
 			{
 				if (Input.GetMouseButtonDown(1))

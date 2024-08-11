@@ -1005,7 +1005,7 @@ public class iZombieSniperGameScene : iZombieSniperGameSceneBase
 
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
-				SetGamePause(true);
+				SetGamePause(!m_bPause);
 			}
 
 			if (Screen.lockCursor)

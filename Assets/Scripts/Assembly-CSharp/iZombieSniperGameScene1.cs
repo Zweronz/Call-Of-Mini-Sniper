@@ -828,6 +828,11 @@ public class iZombieSniperGameScene1 : iZombieSniperGameSceneBase
 		}
 		else
 		{
+			foreach (UITouchInner touch in iPhoneInputMgr.MockTouches())
+			{
+				m_GameSceneUI.m_UIManagerRef.HandleInput(touch);
+			}
+
 			if (Screen.lockCursor)
 			{
 				if (Input.GetMouseButtonDown(1))

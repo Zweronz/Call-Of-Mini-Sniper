@@ -399,6 +399,10 @@ public class iZombieSniperGameScene : iZombieSniperGameSceneBase
 
 	public override void StartGame()
 	{
+		if (!Application.isMobilePlatform)
+		{
+			Screen.lockCursor = true;
+		}
 		ResetData();
 		AddOilCan(50f, 10f);
 		AddOilCan(50f, 10f);
@@ -994,6 +998,11 @@ public class iZombieSniperGameScene : iZombieSniperGameSceneBase
 		}
 		else
 		{
+			foreach (UITouchInner touch in iPhoneInputMgr.MockTouches())
+			{
+				m_GameSceneUI.m_UIManagerRef.HandleInput(touch);
+			}
+
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
 				SetGamePause(true);

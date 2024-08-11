@@ -17,6 +17,14 @@ public class UIControlVisible : UIControl
 			m_Sprite[i] = new UISprite();
 		}
 	}
+	
+	protected void SetSpriteTexture(int index, Material material, Rect texture_rect, Vector2 size, bool direction)
+	{
+		m_Sprite[index].Material = material;
+		m_Sprite[index].TextureRect = texture_rect;
+		m_Sprite[index].Size = size;
+		m_Sprite[index].Position = Vector2.zero;
+	}
 
 	protected void SetSpriteTexture(int index, Material material, Rect texture_rect, Vector2 size)
 	{

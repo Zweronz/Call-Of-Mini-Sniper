@@ -1557,6 +1557,10 @@ public class iZombieSniperGameSceneBase
 	{
 		if (!bPause || (m_State != State.kGameOver && m_State != State.kGameOvering && m_State != State.kGameMoonWalk && m_State != State.kGameMovie))
 		{
+			if (!Application.isMobilePlatform)
+			{
+				Screen.lockCursor = !bPause;
+			}
 			if (m_GameSceneUI != null)
 			{
 				m_GameSceneUI.ShowGamePause(bPause);

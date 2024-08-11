@@ -12,14 +12,14 @@ public class iPhoneInputMgr
 
 	public static UITouchInner[] MockTouches()
 	{
-		if (Input2.touches.Length == 0)
+		if (PCInput.touches.Length == 0)
 		{
 			return touches0;
 		}
-		if (Input2.touches.Length == 1)
+		if (PCInput.touches.Length == 1)
 		{
 			int num = 0;
-			Touch[] array = Input2.touches;
+			Touch[] array = PCInput.touches;
 			for (int i = 0; i < array.Length; i++)
 			{
 				Touch touch = array[i];
@@ -33,10 +33,10 @@ public class iPhoneInputMgr
 			}
 			return touches1;
 		}
-		if (Input2.touches.Length == 2)
+		if (PCInput.touches.Length == 2)
 		{
 			int num2 = 0;
-			Touch[] array2 = Input2.touches;
+			Touch[] array2 = PCInput.touches;
 			for (int j = 0; j < array2.Length; j++)
 			{
 				Touch touch2 = array2[j];
@@ -50,9 +50,9 @@ public class iPhoneInputMgr
 			}
 			return touches2;
 		}
-		touches = new UITouchInner[Input2.touches.Length];
+		touches = new UITouchInner[PCInput.touches.Length];
 		int num3 = 0;
-		Touch[] array3 = Input2.touches;
+		Touch[] array3 = PCInput.touches;
 		for (int k = 0; k < array3.Length; k++)
 		{
 			Touch touch3 = array3[k];

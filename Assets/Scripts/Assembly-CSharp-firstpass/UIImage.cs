@@ -28,6 +28,11 @@ public class UIImage : UIControlVisible
 		CreateSprite(1);
 	}
 
+	public void SetTexture(Material material, Rect texture_rect, Vector2 size, bool direction)
+	{
+		SetSpriteTexture(0, material, texture_rect, size, direction);
+	}
+
 	public void SetTexture(Material material, Rect texture_rect, Vector2 size)
 	{
 		SetSpriteTexture(0, material, texture_rect, size);

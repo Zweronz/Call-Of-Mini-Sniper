@@ -46,8 +46,28 @@ public class PCInput : MonoBehaviour
 
 	private static float deltaTime;
 
+	private void Start()
+	{
+		if (Application.isMobilePlatform)
+		{
+			return;
+		}
+
+		DontDestroyOnLoad(gameObject);
+	}
+
 	private void Update()
 	{
+		if (Application.isMobilePlatform)
+		{
+			return;
+		}
+
+		if (Input.GetKeyDown(KeyCode.F1))
+		{
+			Screen.lockCursor = !Screen.lockCursor;
+		}
+
 		if (!Screen.lockCursor)
 		{
 			if (Input.GetMouseButtonDown(0))

@@ -48,6 +48,8 @@ public class PCInput : MonoBehaviour
 
 	private void Start()
 	{
+		Application.targetFrameRate = 240;
+
 		if (Application.isMobilePlatform)
 		{
 			return;
